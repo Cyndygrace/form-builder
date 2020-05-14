@@ -4,11 +4,12 @@ import { CommonModule } from '@angular/common';
 
 import { AuthenticationRoutingModule } from './authentication-routing.module';
 import { AuthenticationComponent } from './authentication.component';
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component';
 
 
 
 @NgModule({
-  declarations: [AuthenticationComponent, LoginComponent],
+  declarations: [AuthenticationComponent, LoginComponent, ForgotPasswordComponent],
   imports: [
     CommonModule,
     AuthenticationRoutingModule
