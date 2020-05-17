@@ -8,12 +8,18 @@ import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms'
 })
 export class LoginComponent implements OnInit {
   loginForm:FormGroup;
+  signUpForm:FormGroup;
   Images = ["../../../assets/images/auth.svg", "../../../assets/images/data.svg","../../../assets/images/print.svg"];
   hobbies = new FormControl();
   hobbyList: string[] = ['Dance', 'Music', 'Reading', 'Sports', 'Cooking', 'Movies'];
 
   interests = new FormControl();
   interestList: string[] =["Java", "Python", "JavaScript", "Django","GoLang"]
+  duration: any[] = [
+    {id: 0, value: 'Full-time'},
+    {id: 1, value: 'Part-time'},
+    {id: 2, value: 'Internship'}
+  ];
   fileToUpload: File = null;
   url: string="../../../assets/images/print.svg";
 
@@ -21,13 +27,19 @@ export class LoginComponent implements OnInit {
   constructor(private formBuilder: FormBuilder) { }
 
   ngOnInit() {
-    this.buildForm();
+    this.buildLoginForm();
+    this.buildSignUpFrom();
   }
   // geerates formGroup, assign to login form of type formGroup
-  buildForm(email?:string){
+  buildLoginForm(email?:string){
     this.loginForm = this.formBuilder.group({
       email:[email, Validators.required],
-      password:['', Validators.required]
+      password:['', Validators.required],
+    })
+  }
+  buildSignUpFrom(){
+    this.signUpForm = this.formBuilder.group({
+
     })
   }
   submitForm(){
@@ -41,7 +53,7 @@ export class LoginComponent implements OnInit {
  }
 
  editForm() {
-    this.buildForm('email')
+    this.buildLoginForm('email')
  }
 
  handleFileInput(file: FileList) {
