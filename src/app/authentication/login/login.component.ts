@@ -13,15 +13,13 @@ export class LoginComponent implements OnInit {
   hobbies = new FormControl();
   hobbyList: string[] = ['Dance', 'Music', 'Reading', 'Sports', 'Cooking', 'Movies'];
 
-  interests: any [] = [
-    {id:1, name:"Java", title:"java"},
-    {id:2, name:"Python", title:"python"},
-    {id:3, name:"JavaScript" , title:"javaScript"},
-    {id:3, name:"Django" , title:"django"},
-    {id:3, name:"GoLang" , title:"goLang"}
+  interestss: any [] = [
+    {id:1, name:"Java", title:"java", selected:false},
+    {id:2, name:"Python", title:"python", selected:false},
+    {id:3, name:"JavaScript", title:"javaScript", selected:false},
+    {id:3, name:"Django" , title:"django", selected:false},
+    {id:3, name:"GoLang" , title:"goLang", selected:false}
   ];
-
-
 
 
   duration: any[] = [
@@ -53,11 +51,23 @@ export class LoginComponent implements OnInit {
       duration:[''],
       startDate:[''],
       endDate:[''],
-      interests: [['']],
+      interests: this.buildInterests(),
       url:[''],
       rememberMe:[false]
 
     })
+  }
+
+  get interests() {
+    return this.signUpForm.get('interests');
+  }
+
+
+  buildInterests():any {
+    const arr = this.interestss.map(interest => {
+      return this.formBuilder.control(interest.selected);
+    });
+    return this.formBuilder.array(arr);
   }
   submitForm(){
     console.log(this.loginForm.value)
@@ -96,8 +106,8 @@ export class LoginComponent implements OnInit {
   reader.readAsDataURL(this.fileToUpload);
 }
 
-getSelectedInterestForEdit(interest:string[]){
-  const selectedBooleans= this.interests.map((v:any, i:any)=> interest.includes(this.interests[i].title)? true: false)
-  return selectedBooleans
-}
+// getSelectedInterestForEdit(interest:string[]){
+//   const selectedBooleans= this.interests.map((v:any, i:any)=> interest.includes(this.interests[i].title)? true: false)
+//   return selectedBooleans
+// }
 }
